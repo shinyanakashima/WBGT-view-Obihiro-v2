@@ -6,6 +6,8 @@ function App() {
 	const [bgcolor, setBgColor] = useState("#ffffff");
 	const [maxKey, setMaxKey] = useState<string | null>(null);
 	const [maxValue, setMaxValue] = useState<number | null>(null);
+	const [month, setMonth] = useState<number | null>(null);
+	const [day, setDay] = useState<number | null>(null);
 	const [wgbtLevel, setWgbtLevel] = useState("Loading...");
 
 	useEffect(() => {
@@ -26,6 +28,12 @@ function App() {
 					.replaceAll("/", "");
 
 				const todayData = resp.data[dateKey];
+				const month = dateKey.substring(4, 6); // "05"
+				const day = dateKey.substring(6, 8); // "22"
+				const monthNum = parseInt(month, 10); // 5
+				const dayNum = parseInt(day, 10); // 22
+				setMonth(monthNum);
+				setDay(dayNum);
 				if (!todayData) return;
 
 				// 最大値とそのキーを計算
@@ -71,12 +79,14 @@ function App() {
 	return (
 		<div className='App' style={{ backgroundColor: bgcolor }}>
 			<header className='App-header'>
-				<section>熱中症予測@十勝&nbsp;今日これからの最高!</section>
+				<section>熱中症予測@十勝&nbsp;今日の最高暑さ指数</section>
 			</header>
 			<main className='App-main'>
 				{maxValue !== null && maxKey !== null && (
 					<section>
-						<div className='App-main-example'>{maxKey}時頃に</div>
+						<div className='App-main-example'>
+							{month}/{day}&nbsp;{maxKey}時頃に
+						</div>
 						<div className='App-main-caution'>
 							<p>
 								{" "}
