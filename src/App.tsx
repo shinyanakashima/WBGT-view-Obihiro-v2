@@ -4,8 +4,8 @@ import axios from "axios";
 
 function App() {
 	const [bgcolor, setBgColor] = useState("#ffffff");
-	const [maxKey, setMaxKey] = useState(null);
-	const [maxValue, setMaxValue] = useState(null);
+	const [maxKey, setMaxKey] = useState<string | null>(null);
+	const [maxValue, setMaxValue] = useState<number | null>(null);
 	const [wgbtLevel, setWgbtLevel] = useState("Loading...");
 
 	useEffect(() => {
@@ -30,8 +30,8 @@ function App() {
 
 				// 最大値とそのキーを計算
 				const { maxKey, maxValue } = Object.entries(todayData).reduce(
-					(acc, [key, value]) => {
-						if (value > acc.maxValue) {
+					(acc: { maxKey: string | null; maxValue: number }, [key, value]) => {
+						if (typeof value === "number" && value > acc.maxValue) {
 							return { maxKey: key, maxValue: value };
 						}
 						return acc;
@@ -71,7 +71,7 @@ function App() {
 	return (
 		<div className='App' style={{ backgroundColor: bgcolor }}>
 			<header className='App-header'>
-				<section>熱中症予測@十勝　今日これからの最高!</section>
+				<section>熱中症予測@十勝&nbsp;今日これからの最高!</section>
 			</header>
 			<main className='App-main'>
 				{maxValue !== null && maxKey !== null && (
