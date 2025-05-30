@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import axios from "axios";
 
 function App() {
@@ -13,12 +12,10 @@ function App() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// APIから全データ取得
 				const resp = await axios.get(
 					"https://6ealbffjxfgzo4r3kuiac7txry0bnwbm.lambda-url.us-east-1.on.aws/"
 				);
 
-				// 現在日付をキーとして使用
 				const dateKey = new Date()
 					.toLocaleDateString("ja-JP", {
 						year: "numeric",
@@ -28,15 +25,14 @@ function App() {
 					.replaceAll("/", "");
 
 				const todayData = resp.data[dateKey];
-				const month = dateKey.substring(4, 6); // "05"
-				const day = dateKey.substring(6, 8); // "22"
-				const monthNum = parseInt(month, 10); // 5
-				const dayNum = parseInt(day, 10); // 22
+				const month = dateKey.substring(4, 6);
+				const day = dateKey.substring(6, 8);
+				const monthNum = parseInt(month, 10);
+				const dayNum = parseInt(day, 10);
 				setMonth(monthNum);
 				setDay(dayNum);
 				if (!todayData) return;
 
-				// 最大値とそのキーを計算
 				const { maxKey, maxValue } = Object.entries(todayData).reduce(
 					(acc: { maxKey: string | null; maxValue: number }, [key, value]) => {
 						if (typeof value === "number" && value > acc.maxValue) {
@@ -47,7 +43,6 @@ function App() {
 					{ maxKey: null, maxValue: -Infinity }
 				);
 
-				// ステート更新（→ Reactが1回だけ再描画）
 				setMaxKey(maxKey);
 				setMaxValue(maxValue);
 
@@ -60,38 +55,36 @@ function App() {
 				} else if (maxValue >= 25) {
 					setBgColor("#faf500"); // 黄
 					setWgbtLevel("警戒");
-				} else {
-					setBgColor("#a0d2ff"); // 青
+				} else if (maxValue >= 21) {
+					setBgColor("#a0d2ff"); // 水色
 					setWgbtLevel("注意");
+				} else {
+					setBgColor("#218cff"); // 青
+					setWgbtLevel("ほぼ安全");
 				}
 			} catch (err) {
 				console.error("Error fetching data:", err);
 			}
 		};
 
-		fetchData(); // 初回実行
-
-		const timerId = setInterval(fetchData, 60000); // 60秒おきに実行
-
-		return () => clearInterval(timerId); // クリーンアップ（アンマウント時）
-	}, []); // 依存なし：初回マウント時のみ useEffect 実行
+		fetchData();
+		const timerId = setInterval(fetchData, 60000);
+		return () => clearInterval(timerId);
+	}, []);
 
 	return (
-		<div className='App' style={{ backgroundColor: bgcolor }}>
-			<header className='App-header'>
-				<section>熱中症予測@十勝&nbsp;今日の最高暑さ指数</section>
+		<div className='text-center min-h-screen' style={{ backgroundColor: bgcolor }}>
+			<header className='pt-4 text-6xl'>
+				<section>今日の最高暑さ指数@帯広</section>
 			</header>
-			<main className='App-main'>
+			<main className='flex flex-col items-center justify-center pt-20'>
 				{maxValue !== null && maxKey !== null && (
 					<section>
-						<div className='App-main-example'>
-							{month}/{day}&nbsp;{maxKey}時頃に
+						<div className='mb-2 text-8xl'>
+							{month}/{day} {maxKey}時頃に
 						</div>
-						<div className='App-main-caution'>
-							<p>
-								{" "}
-								{wgbtLevel} : {maxValue} ℃
-							</p>
+						<div className='text-[calc(10px+25vmin)] font-bold'>
+							{wgbtLevel} : {maxValue}
 						</div>
 					</section>
 				)}
