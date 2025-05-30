@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import qrEnvWBGT from "./assets/QR_env_wbgt.png";
 
 function App() {
 	const [bgcolor, setBgColor] = useState("#ffffff");
@@ -84,7 +85,14 @@ function App() {
 							{month}/{day} {maxKey}時頃に
 						</div>
 						<div className='text-[calc(10px+25vmin)] font-bold'>
-							{wgbtLevel} : {maxValue}
+							{wgbtLevel} ({maxValue}℃)
+						</div>
+						<div className='flex items-center space-x-4'>
+							<p className='text-2xl text-red-600'>
+								※WBGTは気温よりも低い数値で表示されます。
+							</p>
+							<p>QRコードから環境省サイトで確認できます。</p>
+							<img src={qrEnvWBGT} className='w-24 h-24' alt='Env QR Code' />
 						</div>
 					</section>
 				)}
