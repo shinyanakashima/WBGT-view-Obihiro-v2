@@ -6,6 +6,13 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>暑さ指数(WBGT)アプリ</title>
+  <script>
+    const repoPath = location.pathname.split("/")[1];
+    if (location.pathname === `/${repoPath}/`) {
+      location.replace(`/${repoPath}/obihiro/`);
+    }
+  </script>
+
 </head>
 
 <body>
