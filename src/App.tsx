@@ -3,7 +3,7 @@ import MainPage from "./MainPage";
 
 export default function App() {
 	return (
-		<BrowserRouter basename='/WBGT-view-Obihiro-v2'>
+		<BrowserRouter basename='/WBGT-view-v2'>
 			<Routes>
 				<Route path='/:city' element={<MainPage />} />
 			</Routes>

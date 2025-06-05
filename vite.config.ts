@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/WBGT-view-Obihiro-v2/',
+  base: '/WBGT-view-v2/',
 })
