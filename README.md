@@ -1,4 +1,6 @@
 # 🔥WBGT-view-v2
+[![Deploy to GitHub Pages](https://github.com/shinyanakashima/WBGT-view-v2/actions/workflows/deploy-ghpages.yml/badge.svg)](https://github.com/shinyanakashima/WBGT-view-v2/actions/workflows/deploy-ghpages.yml)
+
 環境省が公表している暑さ指数(WBGT)を表示するデジタルサイネージ向けページで、当日のWBGTを表示します。[熱中症予防情報サイト](https://www.wbgt.env.go.jp/wbgt.php)をもとに構築しています。
 
 - 直近3日間のWBGTを表示
