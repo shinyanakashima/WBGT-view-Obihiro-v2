@@ -84,11 +84,13 @@ export default function MainPage() {
 	}, [API_URL]);
 
 	return (
-		<div className='text-center min-h-screen' style={{ backgroundColor: bgcolor }}>
+		<div
+			className='flex flex-col items-center justify-center text-center min-h-screen'
+			style={{ backgroundColor: bgcolor }}>
 			<header className='pt-4 text-6xl'>
 				<section>今日の最高暑さ指数@{CITY_LABELS[city] ?? "不明な地域"}</section>
 			</header>
-			<main className='flex flex-col items-center justify-center pt-20'>
+			<main>
 				{maxValue !== null && maxKey !== null && (
 					<section>
 						<div className='mb-2 text-8xl'>
