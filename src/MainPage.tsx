@@ -88,16 +88,16 @@ export default function MainPage() {
 			className='flex flex-col items-center justify-center text-center min-h-screen'
 			style={{ backgroundColor: bgcolor }}>
 			<header className='pt-4 text-6xl'>
-				<section>今日の最高暑さ指数@{CITY_LABELS[city] ?? "不明な地域"}</section>
+				<section>今日の熱中症危険度 @{CITY_LABELS[city] ?? "不明な地域"}</section>
 			</header>
 			<main>
 				{maxValue !== null && maxKey !== null && (
 					<section>
-						<div className='mb-2 text-8xl'>
-							{month}/{day} {maxKey}時頃に
-						</div>
-						<div className='text-[calc(10px+20vmin)] font-bold'>
-							{wgbtLevel} ({maxValue}℃)
+						<div className='text-[calc(10px+30vmin)] font-bold'>{wgbtLevel}</div>
+						<div className='flex justify-center mt-6'>
+							<div className='text-4xl'>
+								{month}/{day} {maxKey}時頃にWBGT {maxValue}℃となる見込みです
+							</div>
 						</div>
 						<div className='flex items-center space-x-4 mt-6'>
 							<p className='text-2xl text-red-600'>
