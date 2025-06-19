@@ -94,7 +94,7 @@ export default function MainPage() {
 				{maxValue !== null && maxKey !== null && (
 					<section>
 						<div className='text-[calc(10px+30vmin)] font-bold'>{wgbtLevel}</div>
-						<div className='flex items-center space-x-4 mt-6'>
+						<div className='flex justify-center mt-6'>
 							<div className='text-4xl'>
 								{month}/{day} {maxKey}時頃にWBGT {maxValue}℃となる見込みです
 							</div>
